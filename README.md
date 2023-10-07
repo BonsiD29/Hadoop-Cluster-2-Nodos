@@ -6,7 +6,7 @@ Apache Hadoop es un conjunto de herramientas de código abierto diseñado para a
 ## Configuración de Maquina virtual
 Para ello accederemos a Virtualbox, seleccionaremos la configuración de la máquina y accedemos red y en adapatador 2 seleccionamos adaptador sólo anfitrion 
 
-![image](https://github.com/BonsiD29/Hadoop-Cluster-2-Nodos/assets/147242661/4a17bf5c-a3f0-407d-85eb-4780084910a5)
+![image](https://github.com/BonsiD29/Hadoop-Cluster-2-Nodos/assets/147242661/a71a5c85-5a9d-4282-b212-765be6c5d3db)
 
 
 ## Actualizar el Sistema Operativo
@@ -20,6 +20,17 @@ Para utilizar Apache Hadoop, es necesario acceder de manera remota a las máquin
 ```
 sudo apt install openssh-server
 ```
+## Instalar PDSH usando este comando:
+```
+sudo apt install pdsh
+```
+##Abrimos el archivo .bashrc
+```
+nano .bashrc
+```
+Y añadimos la siguiente línea
+
+>export PDSH_RCMD_TYPE=ssh
 
 ## Instalar Java
 Para utilizar Apache Hadoop, es esencial contar con Java en tu sistema. Puedes realizar la instalación de Java utilizando el siguiente comando:
@@ -87,14 +98,14 @@ ssh localhost
 
 ## Instalar Hadoop
 
-1. Accedemos a su [web](https://hadoop.apache.org) y descargamos la versión indicada por el profesor. 
+1. Accedemos a su [web](https://hadoop.apache.org) y descargamos la versión 3.2.1 
 2. A continuación descomprimimos el fichero
 ```
-tar -xvzf hadoop-X.Y.Z.tar.gz
+tar -xvzf hadoop-3.2.1.tar.gz
 ```
 3. Instalamos la aplicación
 ```
-sudo mv hadoop-X.Y.Z /usr/local/hadoop
+sudo mv hadoop-3.2.1 /usr/local/hadoop
 ```
 4. Creamos el directorio de _logs_ y le asignamos como propietario hadoop
 ```
@@ -197,19 +208,7 @@ y añadimos esto:
 
 
 ### Fichero hdfs-site.sh
-El archivo "hdfs-site.xml" en Hadoop es un archivo de configuración utilizado para establecer propiedades específicas del Sistema de Archivos Distribuido de Hadoop (HDFS). Este archivo es crucial para definir cómo se comporta HDFS y cómo se gestionan y almacenan los datos en un clúster de Hadoop. Algunos de los usos y configuraciones comunes del archivo "hdfs-site.xml" incluyen:
-
-1. **Replicación de bloques:** Puedes configurar el número de réplicas que HDFS debe mantener para cada bloque de datos. Esto afecta la redundancia y la tolerancia a fallos en el sistema.
-
-2. **Ubicación de directorios de almacenamiento de datos:** Puedes especificar la ubicación en el sistema de archivos local donde se almacenarán los bloques de datos de HDFS. Esto es útil para definir rutas personalizadas o configurar discos específicos para el almacenamiento de datos.
-
-3. **Tiempos de vencimiento y caducidad:** Puedes definir políticas de tiempo de vencimiento y caducidad para los archivos en HDFS. Esto puede incluir configuraciones para eliminar automáticamente archivos antiguos o no utilizados después de un cierto período.
-
-4. **Configuración de caché y rendimiento:** Puedes configurar la caché de lectura y escritura, así como otros ajustes de rendimiento para optimizar el acceso a los datos en HDFS.
-
-5. **Configuración de seguridad:** Puedes establecer propiedades de seguridad relacionadas con HDFS, como la habilitación de cifrado de datos en reposo o la configuración de políticas de control de acceso.
-
-6. **Configuración de nodos secundarios:** HDFS utiliza nodos secundarios para mejorar el rendimiento y la integridad de los sistemas de archivos. Puedes definir la ubicación de estos nodos y otras configuraciones relacionadas con ellos en "hdfs-site.xml".
+El archivo "hdfs-site.xml" en Hadoop es un archivo de configuración utilizado para establecer propiedades específicas del Sistema de Archivos Distribuido de Hadoop (HDFS). Este archivo es crucial para definir cómo se comporta HDFS y cómo se gestionan y almacenan los datos en un clúster de Hadoop. 
 
 Editamos el fichero hdfs-site.xml
 ```
@@ -240,15 +239,7 @@ sudo chown -R hadoop:hadoop /home/hadoop/hdfs
 
 ## Fichero mapred-site.xml
 
-El archivo "mapred-site.xml" en Hadoop es un archivo de configuración utilizado para establecer propiedades específicas del procesamiento de datos y la programación de tareas en el marco de trabajo MapReduce de Hadoop. MapReduce es una parte fundamental de Hadoop y se utiliza para procesar grandes conjuntos de datos de manera paralela y distribuida. Algunas de las configuraciones comunes que se pueden establecer en "mapred-site.xml" incluyen:
-
-1. **Configuración del framework de ejecución de tareas:** Puedes especificar el framework de ejecución de tareas que MapReduce utilizará para la ejecución de tareas. Puedes elegir entre varios, como el framework local, el framework clásico o el framework YARN (Yet Another Resource Negotiator), según tus necesidades.
-
-2. **Configuración de recursos de clúster:** Puedes definir las cantidades de recursos que se asignarán a las tareas de MapReduce, como la cantidad de memoria, la cantidad de núcleos de CPU, etc.
-
-3. **Programación de tareas y ajustes de rendimiento:** Puedes establecer configuraciones relacionadas con la programación de tareas de MapReduce, como la cantidad máxima de tareas concurrentes, el tiempo de espera antes de reintentar tareas, etc. También puedes ajustar la configuración para el rendimiento, como la compresión de datos, el uso de combinadores y otras optimizaciones.
-
-4. **Configuración de seguridad:** Puedes definir propiedades de seguridad relacionadas con MapReduce, como la configuración de la autenticación y autorización de tareas, o el acceso a recursos seguros.
+El archivo "mapred-site.xml" en Hadoop es un archivo de configuración utilizado para establecer propiedades específicas del procesamiento de datos y la programación de tareas en el marco de trabajo MapReduce de Hadoop. MapReduce es una parte fundamental de Hadoop y se utiliza para procesar grandes conjuntos de datos de manera paralela y distribuida.
 
 Editamos el fichero mapred-site.xml
 ```
@@ -266,19 +257,7 @@ y añadimos esto:
 
 ## Fichero yarn-site.xml
 
-El archivo "yarn-site.xml" en Hadoop es un archivo de configuración utilizado para establecer propiedades específicas del administrador de recursos YARN (Yet Another Resource Negotiator). YARN es un componente fundamental de Hadoop que se encarga de la gestión y asignación eficiente de recursos en un clúster, lo que permite ejecutar aplicaciones de procesamiento de datos de manera escalable y paralela. Algunas de las configuraciones comunes que se pueden definir en "yarn-site.xml" incluyen:
-
-1. **Recursos de clúster:** Puedes configurar la cantidad de recursos disponibles en el clúster, como la cantidad total de memoria y la cantidad de núcleos de CPU que se pueden asignar a las aplicaciones.
-
-2. **Programación de tareas:** Puedes definir políticas de programación, como las colas de aplicaciones, prioridades de trabajos y límites de recursos para garantizar un uso justo y eficiente de los recursos del clúster.
-
-3. **Configuración de alta disponibilidad:** Puedes especificar configuraciones relacionadas con la alta disponibilidad, como la ubicación de los recursos de recuperación y las políticas de conmutación por error para los componentes de YARN.
-
-4. **Configuración de seguridad:** Puedes definir propiedades de seguridad, como configuraciones de autenticación, autorización y el cifrado de datos en YARN.
-
-5. **Configuración de registros y diagnóstico:** Puedes establecer propiedades para la recopilación de registros y diagnóstico de aplicaciones en ejecución en el clúster.
-
-6. **Configuración de contenedores y nodos de trabajo:** Puedes definir propiedades relacionadas con la administración de contenedores y nodos de trabajo, como los límites de memoria y CPU por contenedor, entre otros.
+El archivo "yarn-site.xml" en Hadoop es un archivo de configuración utilizado para establecer propiedades específicas del administrador de recursos YARN (Yet Another Resource Negotiator). YARN es un componente fundamental de Hadoop que se encarga de la gestión y asignación eficiente de recursos en un clúster, lo que permite ejecutar aplicaciones de procesamiento de datos de manera escalable y paralela. 
 
 Editamos el fichero mapred-site.xml
 ```
@@ -325,6 +304,108 @@ Debería dar una salida como:
 /************************************************************  
 SHUTDOWN_MSG: Shutting down NameNode at ubuntu2004/69.87.216.36  
 ************************************************************/
+
+##Ahora abrimos el archivo environment con nano
+
+```
+sudo nano /etc/environment
+```
+Y añadimos:
+
+>PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/hadoop/bin:/usr/local/hadoop/sbin"JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/jre"
+
+##Averiguaremos nuestra ip con el comando:
+
+>ip addr
+
+![image](https://github.com/BonsiD29/Hadoop-Cluster-2-Nodos/assets/147242661/079cdb5f-7307-48af-bdc0-fd55f0d50625)
+
+siendo en mi caso la ip: 192.168.56.103 y añadiendo un uno al final para los esclavos quedando tal que:
+
+master: 192.168.56.103
+
+slave1: 192.168.56.104
+
+slave2: 192.168.56.105
+
+## Abrimos el archivo de hosts y añadimos nuestra configuración de red:
+```
+sudo nano /etc/hosts
+```
+y añadimos:
+192.168.56.103 hadoop-master
+
+192.168.56.104 hadoop-slave1
+
+192.168.56.105 hadoop-slave2
+
+Y procemos a clonar la máquina virtual master con la opción "Generar nuevas direcciones MAC para todos los adaptadores de red"
+
+##Añadimos el rol a cada máquina
+En cada máquina individual añadimos en el archivo hostname su rol con el comando:
+
+```
+sudo nano /etc/hostname
+```
+
+y reinciamos la máquina para que la configuración haga efecto:
+```
+sudo reboot
+```
+
+##Dar acceso a los esclavos
+En el usario Hadoop-master
+
+```
+su - hadoop
+```
+
+Creamos una SSH Key:
+```
+ssh-keygen -t rsa
+```
+Y copiamos la key en ambos esclavos con el comando:
+```
+ssh-copy-id hadoopuser@hadoop-master
+ssh-copy-id hadoopuser@hadoop-slave1
+ssh-copy-id hadoopuser@hadoop-slave2
+```
+
+##Abrimos el fichero workers
+En el hadoop-master con el comnado:
+```
+sudo nano /usr/local/hadoop/etc/hadoop/workers
+```
+y añadimos el nombre de las otras máquinas tal que sea
+
+>hadoop-slave1
+>hadoop-slave2
+
+##Copiamos la configuración del Hadoop master en los slaves
+Se usará el comando:
+```
+scp /usr/local/hadoop/etc/hadoop/* hadoop-slave1:/usr/local/hadoop/etc/hadoop/
+scp /usr/local/hadoop/etc/hadoop/* hadoop-slave2:/usr/local/hadoop/etc/hadoop/
+```
+
+### Formateamos el sistema de archivos HDFS
+Con los comandos: 
+```
+source /etc/environment
+hdfs namenode -format
+```
+
+###Configuración de Yarn
+
+Para ello usaremos los diferentes comandos
+
+>export HADOOP_HOME="/usr/local/hadoop"
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_YARN_HOME=$HADOOP_HOME
+
 
 ## Arranque de Hadoop
 En primer lugar, inicia el NameNode y el DataNode con el siguiente comando:
