@@ -1,4 +1,4 @@
-# Instalación de un clúster de dos nodos con Hadoop
+![image](https://github.com/BonsiD29/Hadoop-Cluster-2-Nodos/assets/147242661/66abd5d4-99c9-40b9-834a-1643e34259ba)# Instalación de un clúster de dos nodos con Hadoop
 
 ## Instalación de Hadoop
 Apache Hadoop es un conjunto de herramientas de código abierto diseñado para administrar, almacenar y procesar datos en entornos de big data que operan en clústeres de sistemas. Escrito principalmente en Java, con algunos fragmentos de código nativo en C y scripts de shell, este sistema utiliza un sistema de archivos distribuido denominado HDFS y puede adaptarse desde servidores individuales hasta miles de máquinas.
@@ -6,6 +6,7 @@ Apache Hadoop es un conjunto de herramientas de código abierto diseñado para a
 ## Configuración de Maquina virtual
 Para ello accederemos a Virtualbox, seleccionaremos la configuración de la máquina y accedemos red y en adapatador 2 seleccionamos adaptador sólo anfitrion 
 
+![image](https://github.com/BonsiD29/Hadoop-Cluster-2-Nodos/assets/147242661/4a17bf5c-a3f0-407d-85eb-4780084910a5)
 
 
 ## Actualizar el Sistema Operativo
