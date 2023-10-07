@@ -1,4 +1,4 @@
-![image](https://github.com/BonsiD29/Hadoop-Cluster-2-Nodos/assets/147242661/66abd5d4-99c9-40b9-834a-1643e34259ba)# Instalación de un clúster de dos nodos con Hadoop
+# Instalación de un clúster de dos nodos con Hadoop
 
 ## Instalación de Hadoop
 Apache Hadoop es un conjunto de herramientas de código abierto diseñado para administrar, almacenar y procesar datos en entornos de big data que operan en clústeres de sistemas. Escrito principalmente en Java, con algunos fragmentos de código nativo en C y scripts de shell, este sistema utiliza un sistema de archivos distribuido denominado HDFS y puede adaptarse desde servidores individuales hasta miles de máquinas.
